@@ -10,21 +10,25 @@ var Countdown = React.createClass({
   decrease: function () {
 
     if (this.state.time > 0) {
-
-      this.setState({
-        time: this.state.time - 1,
-        progressBarValue: this.state.progressBarValue - 10
-      });
+      this.setState({ time: this.state.time - 1 });
     }
 
   },
 
+  decreaseProgressBar: function () {
+    if (this.state.progressBarValue > 0) {
+      this.setState({progressBarValue: this.state.progressBarValue - 1});
+    }
+  },
+
   componentDidMount: function () {
     this.interval = setInterval(this.decrease, 1000);
+    this.progressBarInterval = setInterval(this.decreaseProgressBar, 100);
   },
 
   componentWillUnmount: function () {
     clearInterval(this.interval);
+    clearInterval(this.progressBarInterval);
   },
 
   render: function () {
